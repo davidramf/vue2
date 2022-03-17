@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <div id="app">
+        <h1 v-bind:class="changePercent > 0 ? 'green' : 'red'"> {{title}}
+            <div v-if="changePercent > 0">Cool! 😄</div>
+            <div v-else-if="changePercent < 0">ehh!</div>
+            <div v-else>No Cool!</div>
+
+            <div v-show="changePercent > 0">Cool! 😄</div>
+        </h1>
+        <ul>
+            <li v-for="p in prices" :key="p">{{p}} <a href="#" @click="removeItem(p)" v-bind:style="{ color: p > 100 ? 'green' : 'red'}">Remove</a></li>
+        </ul>
+        <ul>
+            <li v-for="(p,i) in pricesWithDays" :key="p.day" :class="{ green: p.value == brand.price, red: p.value > brand.price }">{{i}} - {{p.day}} - {{p.value}}</li>
+        </ul>
+        
+        <test-component v-on:change-color="changeColor" v-bind:coin="brand">
+            <template v-slot:text>
+                <p>Text Slot</p>
+                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ex voluptatem corporis perferendis blanditiis totam doloribus placeat sint enim fugiat. Veniam optio fugiat voluptatibus sapiente beatae officia doloremque ea! Est, repudiandae.</p>
+        </template>
+        <template v-slot:link>
+            <p>Link Slot</p>
+        </template>
+        </test-component>
+       
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.js"></script>
+    <script src='app.js'></script>
+</body>
+
+</html>
